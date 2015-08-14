@@ -38,6 +38,8 @@ Local<Object> SelectResults::NewInstance(const SelectResultsPtr & selectResultsP
   SelectResults * selectResults = new SelectResults(selectResultsPtr);
   selectResults->Wrap(v8Object);
 
+  delete argv;
+
   return NanEscapeScope(v8Object);
 }
 

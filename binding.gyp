@@ -12,10 +12,34 @@
     "defines": [
       "_REENTRANT"
     ],
-    "libraries": [ 
-      "-lgfcppcache", 
-      "-L$(GFCPP)/lib"
+    "conditions": [
+     ["OS=='win'", {
+       "libraries": [ 
+       "-l$(GFCPP)/lib/gfcppcache"
+       ],
+      },
+     ],
+     ["OS!='win'", {
+       "libraries": [ 
+       "-lgfcppcache", 
+       "-L$(GFCPP)/lib/"
+      ],
+     },
     ],
+    ["configuration=='Debug'", {
+      "targets": [
+        {
+          "target_name": "test",
+          "libraries": [
+            "-lgtest"
+          ],
+          "sources": [
+            "spec/cpp/test.cpp",
+          ]
+        }
+      ]
+    }],
+   ],
     "sources": [
       "src/dependencies.cpp",
       "src/exceptions.cpp",
@@ -52,20 +76,5 @@
         }
       ]
     },
-  ],
-  "conditions": [
-    ["configuration=='Debug'", {
-      "targets": [
-        {
-          "target_name": "test",
-          "libraries": [
-            "-lgtest"
-          ],
-          "sources": [
-            "spec/cpp/test.cpp",
-          ]
-        }
-      ]
-    }]
   ]
 }
