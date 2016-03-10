@@ -19,7 +19,7 @@ std::string getClassName(const Local<Object> & v8Object) {
   NanScope();
 
   std::set<std::string> fieldNames;
-  uint totalSize = 0;
+  unsigned int totalSize = 0;
 
   Local<Array> v8Keys(v8Object->GetOwnPropertyNames());
   unsigned int numKeys = v8Keys->Length();
@@ -369,7 +369,7 @@ Local<Value> v8Value(const PdxInstancePtr & pdxInstance) {
 Local<Value> v8Value(const CacheableInt64Ptr & valuePtr) {
   NanEscapableScope();
 
-  static const int64_t maxSafeInteger = pow(2, 53) - 1;
+  static const int64_t maxSafeInteger = pow(2.0, 53.0) - 1;
   static const int64_t minSafeInteger = -1 * maxSafeInteger;
 
   int64_t value = static_cast<CacheableInt64Ptr>(valuePtr)->value();

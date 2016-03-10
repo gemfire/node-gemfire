@@ -32,11 +32,13 @@ Local<Object> SelectResults::NewInstance(const SelectResultsPtr & selectResultsP
   NanEscapableScope();
 
   const unsigned int argc = 0;
-  Local<Value> argv[argc] = {};
+  Local<Value>* argv = new Local<Value>[argc];
   Local<Object> v8Object(NanNew(SelectResults::constructor)->NewInstance(argc, argv));
 
   SelectResults * selectResults = new SelectResults(selectResultsPtr);
   selectResults->Wrap(v8Object);
+
+  delete argv;
 
   return NanEscapeScope(v8Object);
 }
